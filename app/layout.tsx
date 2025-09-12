@@ -60,31 +60,17 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                             <SettingsProvider>
                                 <ThemeProvider attribute='class' defaultTheme='dark' enableSystem>
                                     <ParticlesComponent className='z-[-1] h-full w-full fixed' />
-                                    <div className='fixed justify-between items-start flex w-full max-w-screen p-4 z-[10]'>
+                                    <div className='fixed justify-between items-center flex w-full max-w-screen p-4 z-[10]'>
                                         <div className='flex flex-col gap-2'>
                                             <SettingsForm />
                                             <ChangelogDialog />
                                         </div>
                                         <div className='flex gap-2 items-center'>
-                                            <DropdownMenu>
-                                                <DropdownMenuTrigger asChild>
-                                                    <Button variant='outline' size='icon'>
-                                                        <FaDiscord />
-                                                    </Button>
-                                                </DropdownMenuTrigger>
-                                                <DropdownMenuContent>
-                                                    <DropdownMenuItem>
-                                                        <a href='https://discord.gg/rhUUKQagjA' target='_blank' rel='noopener noreferrer'>
-                                                            Qobuz-DL Discord
-                                                        </a>
-                                                    </DropdownMenuItem>
-                                                    <DropdownMenuItem>
-                                                        <a href='https://discord.gg/invite/GN7GnntyQ2' target='_blank' rel='noopener noreferrer'>
-                                                            Squidboard Discord
-                                                        </a>
-                                                    </DropdownMenuItem>
-                                                </DropdownMenuContent>
-                                            </DropdownMenu>
+                                            <a href='https://discord.com/invite/mWQ6bCfkfA' target='_blank' rel='noopener noreferrer'>
+                                                <Button variant='outline' size='icon'>
+                                                    <FaDiscord />
+                                                </Button>
+                                            </a>
                                             <a href='https://github.com/QobuzDL/Qobuz-DL' target='_blank' rel='noopener noreferrer'>
                                                 <Button variant='outline' size='icon'>
                                                     <FaGithub />
