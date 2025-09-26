@@ -30,5 +30,12 @@
             "Added an error message explaining sample files provided by Qobuz",
             "Added more icons to track items"
         ]
+    },
+    {
+        "title": "[SquidWTF] Added site exclusive buttons and messages",
+        "date": "01-09-2025",
+        "changes": [
+            "Added site exclusive buttons and messages"
+        ]
     }
 ]

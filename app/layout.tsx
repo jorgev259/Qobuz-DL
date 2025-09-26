@@ -13,6 +13,11 @@ import { SettingsProvider } from '@/lib/settings-provider';
 import { StatusBarProvider } from '@/lib/status-bar/context';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
+
+import DonateButton from '@/customs/header/DonateButton';
+import DiscordButton from '@/customs/header/DiscordButton';
+import GithubButton from '@/customs/header/GithubButton';
+
 import { CountryProvider } from '@/lib/country-provider';
 import './globals.css';
 
@@ -60,12 +65,17 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                             <SettingsProvider>
                                 <ThemeProvider attribute='class' defaultTheme='dark' enableSystem>
                                     <ParticlesComponent className='z-[-1] h-full w-full fixed' />
-                                    <div className='fixed justify-between items-center flex w-full max-w-screen p-4 z-[10]'>
+                                    <div className='fixed justify-between items-start flex w-full max-w-screen p-4 z-[10]'>
                                         <div className='flex flex-col gap-2'>
                                             <SettingsForm />
                                             <ChangelogDialog />
                                         </div>
                                         <div className='flex gap-2 items-center'>
+                                            <DonateButton />
+                                            <DiscordButton />
+                                            <GithubButton />
+                                        </div>
+                                        {/*    <div className='flex gap-2 items-center'>
                                             <a href='https://discord.com/invite/mWQ6bCfkfA' target='_blank' rel='noopener noreferrer'>
                                                 <Button variant='outline' size='icon'>
                                                     <FaDiscord />
@@ -76,8 +86,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                                                     <FaGithub />
                                                 </Button>
                                             </a>
-                                        </div>
+                                        </div> */}
                                     </div>
+
                                     <div className='flex flex-col min-h-screen'>
                                         <main className='px-6 pb-12 pt-32 md:pt-24 2xl:pt-60 min-h-full flex-1 flex flex-col items-center justify-center gap-2 z-[2] overflow-x-hidden max-w-screen overflow-y-hidden'>
                                             {children}
