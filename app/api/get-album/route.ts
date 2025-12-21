@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAlbumInfo } from '@/lib/qobuz-dl-server';
+import { removeAnalytics } from '@/lib/utils';
 import z from 'zod';
 
 const albumInfoParamsSchema = z.object({
@@ -12,7 +13,7 @@ export async function GET(request: NextRequest) {
     try {
         const { album_id } = albumInfoParamsSchema.parse(params);
         const data = await getAlbumInfo(album_id, country ? { country } : {});
-        return new NextResponse(JSON.stringify({ success: true, data }), { status: 200 });
+        return new NextResponse(JSON.stringify({ success: true, data: removeAnalytics(data) }), { status: 200 });
     } catch (error: any) {
         return new NextResponse(
             JSON.stringify({

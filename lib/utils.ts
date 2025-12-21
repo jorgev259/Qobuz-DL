@@ -97,3 +97,26 @@ export function getRandomItem<T = unknown>(array: T[] | undefined) {
     if (!array) return undefined;
     return array[Math.floor(Math.random() * array.length)];
 }
+
+// remove analytics from the returned from the qobuz api
+export function removeAnalytics<T>(data: T): T {
+    if (data === null || data === undefined || typeof data !== 'object') {
+        return data;
+    }
+    if (Array.isArray(data)) {
+        for (let i = 0; i < data.length; i++) {
+            data[i] = removeAnalytics(data[i]);
+        }
+        return data;
+    }
+    // Mutate object in-place: delete 'analytics' and recurse on remaining properties
+    if ('analytics' in data) {
+        delete (data as any).analytics;
+    }
+    for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+            (data as any)[key] = removeAnalytics((data as any)[key]);
+        }
+    }
+    return data;
+}
