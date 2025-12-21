@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getArtistReleases } from '@/lib/qobuz-dl-server';
+import { removeAnalytics } from '@/lib/utils';
 import z from 'zod';
 
 const releasesParamsSchema = z.object({
@@ -16,7 +17,7 @@ export async function GET(request: NextRequest) {
     try {
         const { artist_id, release_type, track_size, offset, limit } = releasesParamsSchema.parse(params);
         const data = await getArtistReleases(artist_id, release_type, limit, offset, track_size, country ? { country } : {});
-        return new NextResponse(JSON.stringify({ success: true, data }), { status: 200 });
+        return new NextResponse(JSON.stringify({ success: true, data: removeAnalytics(data) }), { status: 200 });
     } catch (error: any) {
         return new NextResponse(
             JSON.stringify({

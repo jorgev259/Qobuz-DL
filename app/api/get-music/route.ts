@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { search } from '@/lib/qobuz-dl-server';
+import { removeAnalytics } from '@/lib/utils';
 import z from 'zod';
 
 const searchParamsSchema = z.object({
@@ -13,7 +14,7 @@ export async function GET(request: NextRequest) {
     try {
         const { q, offset } = searchParamsSchema.parse(params);
         const searchResults = await search(q, 10, offset, country ? { country } : {});
-        return new NextResponse(JSON.stringify({ success: true, data: searchResults }), { status: 200 });
+        return new NextResponse(JSON.stringify({ success: true, data: removeAnalytics(searchResults) }), { status: 200 });
     } catch (error: any) {
         return new NextResponse(
             JSON.stringify({

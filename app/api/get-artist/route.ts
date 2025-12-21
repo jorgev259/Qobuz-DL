@@ -1,4 +1,5 @@
 import { getArtist } from '@/lib/qobuz-dl-server';
+import { removeAnalytics } from '@/lib/utils';
 import z from 'zod';
 
 const artistReleasesParamsSchema = z.object({
@@ -11,7 +12,7 @@ export async function GET(request: Request) {
     try {
         const { artist_id } = artistReleasesParamsSchema.parse(params);
         const artist = await getArtist(artist_id, country ? { country } : {});
-        return new Response(JSON.stringify({ success: true, data: { artist } }), { status: 200 });
+        return new Response(JSON.stringify({ success: true, data: { artist: removeAnalytics(artist) } }), { status: 200 });
     } catch (error: any) {
         return new Response(
             JSON.stringify({
